@@ -44,3 +44,13 @@ class Bike(models.Model):
         return self.bike_name
 
 
+class BikeImages(models.Model):
+    bike = models.ForeignKey(Bike, on_delete=models.PROTECT)
+    image = models.ImageField(upload_to='bike_images')
+
+    def __str__(self):
+        if self.image:
+            return self.image.url
+        return ''
+
+
