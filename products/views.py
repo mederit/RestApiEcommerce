@@ -29,11 +29,11 @@ class BikeView(generics.ListAPIView):
     serializer_class = BikeSerializer
     permission_classes = [permissions.AllowAny]
 
-    # def get_queryset(self):
-    #     filter = self.request.query_params.get('filter')
-    #     queryset = super().get_queryset()
-    #     queryset = queryset.filter(Q(category__category_name__icontains=filter) | Q(color__color_name__icontains=filter))
-    #     return queryset
+    def get_queryset(self):
+        filter_ = self.request.query_params.get('filter')
+        queryset = super().get_queryset()
+        queryset = queryset.filter(Q(category__category_name__icontains=filter_) | Q(color__color_name__icontains=filter_))
+        return queryset
 
 class BikeDetailView(generics.RetrieveAPIView):
     queryset = Bike.objects.all()

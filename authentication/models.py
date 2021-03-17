@@ -64,13 +64,5 @@ class User(AbstractBaseUser, PermissionsMixin):
         }
 
 
-class Shipping(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    name = models.CharField(max_length=100)
-    address = models.CharField(max_length=100)
-    locality = models.CharField(max_length=100)
-    landmark = models.CharField(max_length=100)
-    contact_number = models.CharField(max_length=30)
-
 
 
