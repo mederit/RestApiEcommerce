@@ -35,11 +35,13 @@ class CartView(APIView):
 
     def patch(self, request):
         data = request.data
+        client = request.user
+        cart = Cart.objects.filter(client=client, ordered=False).first()
         cart_item = CartItem.objects.get(id=data.get('id'))
         quantity = data.get('quantity')
         cart_item.quantity = quantity
         cart_item.save()
-        return Response({'success': 'Items Edited'})
+        return Response({'success': 'has been successfully edited'})
 
     def delete(self, request):
         client = request.user
@@ -59,5 +61,5 @@ class CartView(APIView):
         cart = Cart.objects.filter(client=client, ordered=False).first()
         cart.ordered = True
         cart.save()
-        return Response({'success': 'Items Ordered'})
+        return Response({'success': 'has been successfully ordered'})
 
